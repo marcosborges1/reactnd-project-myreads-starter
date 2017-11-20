@@ -8,17 +8,29 @@ import { Route } from 'react-router-dom'
 
 class BooksApp extends Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
     books: {
       read:[],
       wantToRead:[],
       currentlyReading:[]
     }
+  }
+
+  updateBookToShelf = (book, shelf) => {
+
+    BooksAPI.update(book, shelf).then(()=> {
+
+        let read = this.state.books['read'].filter(c=>c.title!==book.title)
+        let wantToRead = this.state.books['wantToRead'].filter(c=>c.title!==book.title)
+        let currentlyReading = this.state.books['currentlyReading'].filter(c=>c.title!==book.title)
+
+        read = (shelf==='read') ? read.concat([book]) : read
+        wantToRead = (shelf==='wantToRead') ? wantToRead.concat([book]) : wantToRead
+        currentlyReading = (shelf==='currentlyReading') ? currentlyReading.concat([book]): currentlyReading
+
+        this.setState({books:{'read':read,'wantToRead':wantToRead,'currentlyReading':currentlyReading}})
+    })
+
+
   }
 
   componentDidMount = () => {
@@ -29,14 +41,14 @@ class BooksApp extends Component {
           this.setState({books:{'read':read,'wantToRead':wantToRead,'currentlyReading':currentlyReading}})
      })
   }
-  
 
   render() { 
     
+   // console.log(this.state.books)
     return (
       <div className="app">
         <Route exact path="/" render={()=>(
-            <ListBooks />
+            <ListBooks books={this.state.books} updateBook={this.updateBookToShelf} />
           )}
         />
         <Route path="/search" render={()=> (
