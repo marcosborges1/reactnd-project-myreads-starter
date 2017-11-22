@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom' 
 import Books from './Books'
+import PropTypes from 'prop-types'
 
 class SearchBook extends Component {
 
@@ -10,8 +11,8 @@ class SearchBook extends Component {
 
   updateSearch = (value) => {
     this.props.search(value, 20).then(books=> {
-      this.setState({books: (books)?books:[]})     
-    })
+       this.setState({books: (books)?books:[]})     
+    })  
   }
 
   render() {
@@ -36,13 +37,16 @@ class SearchBook extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <Books books={books} updateBook={updateBook} selectedShelf='none'/>
+          {books.length>0 && (<Books books={books} updateBook={updateBook} selectedShelf='none'/>)}
         </div>
-
       </div>
     )
   }
+}
 
+SearchBook.propTypes = {
+  search: PropTypes.func.isRequired,
+  updateBook: PropTypes.func.isRequired,
 }
 
 export default SearchBook

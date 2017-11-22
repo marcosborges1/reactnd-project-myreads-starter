@@ -1,9 +1,10 @@
 import React, {Component} from "react"
 import {Link} from 'react-router-dom'
 import BooksByShelf from './BooksByShelf'
+import PropTypes from 'prop-types'
 
 class ListBooks extends Component {
-  
+
   render() {
 
     const {books, updateBook} = this.props
@@ -27,6 +28,13 @@ class ListBooks extends Component {
       </div>
     )
   }
+}
+
+ListBooks.propTypes = {
+
+  books: PropTypes.object.isRequired,
+  updateBook : PropTypes.func.isRequired
+
 }
 
 export default ListBooks

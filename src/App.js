@@ -21,20 +21,21 @@ class BooksApp extends Component {
 
     BooksAPI.update(book, shelf).then(()=> {
 
-        let read = this.state.books['read'].filter(c=>c.title!==book.title)
-        let wantToRead = this.state.books['wantToRead'].filter(c=>c.title!==book.title)
-        let currentlyReading = this.state.books['currentlyReading'].filter(c=>c.title!==book.title)
+      let read = this.state.books['read'].filter(c=>c.title!==book.title)
+      let wantToRead = this.state.books['wantToRead'].filter(c=>c.title!==book.title)
+      let currentlyReading = this.state.books['currentlyReading'].filter(c=>c.title!==book.title)
 
-        read = (shelf==='read') ? read.concat([book]) : read
-        wantToRead = (shelf==='wantToRead') ? wantToRead.concat([book]) : wantToRead
-        currentlyReading = (shelf==='currentlyReading') ? currentlyReading.concat([book]): currentlyReading
+      read = (shelf==='read') ? read.concat([book]) : read
+      wantToRead = (shelf==='wantToRead') ? wantToRead.concat([book]) : wantToRead
+      currentlyReading = (shelf==='currentlyReading') ? currentlyReading.concat([book]): currentlyReading
 
-        this.setState({books:{'read':read,'wantToRead':wantToRead,'currentlyReading':currentlyReading}})
+      this.setState({books:{'read':read,'wantToRead':wantToRead,'currentlyReading':currentlyReading}})
+      
     })
 
   }
 
-  searchBook = (search, maxResults=5) => {
+  searchBook = (search, maxResults=20) => {
 
     return BooksAPI.search(search,maxResults)
 
@@ -45,7 +46,6 @@ class BooksApp extends Component {
           const read = books.filter(book=> book.shelf==='read')
           const wantToRead = books.filter(book=> book.shelf==='wantToRead')
           const currentlyReading = books.filter(book=> book.shelf==='currentlyReading')
-          // console.log(read)
           this.setState({books:{'read':read,'wantToRead':wantToRead,'currentlyReading':currentlyReading}})
      })
   }
