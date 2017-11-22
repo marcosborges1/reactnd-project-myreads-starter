@@ -7,7 +7,7 @@ class ListBooks extends Component {
   render() {
 
     const {books, updateBook} = this.props
-
+    console.log(books.currentlyReading)
     return (
 
       <div className="list-books">

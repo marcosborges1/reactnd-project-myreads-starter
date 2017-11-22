@@ -17,6 +17,8 @@ class BooksApp extends Component {
 
   updateBookToShelf = (book, shelf) => {
 
+    if(shelf==='none') return
+
     BooksAPI.update(book, shelf).then(()=> {
 
         let read = this.state.books['read'].filter(c=>c.title!==book.title)
@@ -30,6 +32,11 @@ class BooksApp extends Component {
         this.setState({books:{'read':read,'wantToRead':wantToRead,'currentlyReading':currentlyReading}})
     })
 
+  }
+
+  searchBook = (search, maxResults=5) => {
+
+    return BooksAPI.search(search,maxResults)
 
   }
 
@@ -38,11 +45,12 @@ class BooksApp extends Component {
           const read = books.filter(book=> book.shelf==='read')
           const wantToRead = books.filter(book=> book.shelf==='wantToRead')
           const currentlyReading = books.filter(book=> book.shelf==='currentlyReading')
+          // console.log(read)
           this.setState({books:{'read':read,'wantToRead':wantToRead,'currentlyReading':currentlyReading}})
      })
   }
 
-  render() { 
+  render() {
     
    // console.log(this.state.books)
     return (
@@ -52,7 +60,7 @@ class BooksApp extends Component {
           )}
         />
         <Route path="/search" render={()=> (
-            <SearchBook />
+            <SearchBook search={this.searchBook} updateBook={this.updateBookToShelf}/>
           )} 
         />
       </div>
