@@ -7,15 +7,11 @@ class SearchBook extends Component {
   state = {
     books:[]
   }
-  updateQuery = (value)=> {
-    this.setState({query: value.trim()})
-  }
 
   updateSearch = (value) => {
-      this.props.search(value, 20).then(books=> {
-        console.log(books)
-          this.setState({books: (books && books.length>0)?books:[]})     
-      })
+    this.props.search(value, 20).then(books=> {
+      this.setState({books: (books)?books:[]})     
+    })
   }
 
   render() {
@@ -40,7 +36,7 @@ class SearchBook extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <Books booksByShelf={books} updateBook={updateBook} shelfSelected='none'/>
+          <Books books={books} updateBook={updateBook} selectedShelf='none'/>
         </div>
 
       </div>

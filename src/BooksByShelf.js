@@ -5,13 +5,13 @@ class BooksByShelf extends Component {
 
   render() {
 
-    const {name, booksByShelf, updateBook,shelfSelected} = this.props
+    const {name, books, updateBook,selectedShelf} = this.props
 
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{name}</h2>
         <div className="bookshelf-books">
-          <Books booksByShelf={booksByShelf} shelfSelected={shelfSelected} updateBook={updateBook}/>
+          <Books books={books} selectedShelf={selectedShelf} updateBook={updateBook}/>
         </div>
       </div>
     )
