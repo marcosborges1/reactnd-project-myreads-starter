@@ -15,7 +15,7 @@ class SearchBook extends Component {
     const result = this.props.books.find(b=>{
         return (b.id===book.id)
     })
-    return (result) ? result.shelf: ''
+    return (result) ? result.shelf: undefined
   }
 
   updateSearch = (value) => {
