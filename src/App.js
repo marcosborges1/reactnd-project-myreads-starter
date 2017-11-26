@@ -7,12 +7,8 @@ import { Route } from 'react-router-dom'
 
 
 class BooksApp extends Component {
-  state = {
-    books: {
-      read:[],
-      wantToRead:[],
-      currentlyReading:[]
-    }
+  state = { 
+    books:[]
   }
 
   updateBookToShelf = (book, shelf) => {
@@ -20,42 +16,28 @@ class BooksApp extends Component {
     if(shelf==='none') return
 
     BooksAPI.update(book, shelf).then(()=> {
-
-      let read = this.state.books['read'].filter(c=>c.title!==book.title)
-      let wantToRead = this.state.books['wantToRead'].filter(c=>c.title!==book.title)
-      let currentlyReading = this.state.books['currentlyReading'].filter(c=>c.title!==book.title)
-
-      read = (shelf==='read') ? read.concat([book]) : read
-      wantToRead = (shelf==='wantToRead') ? wantToRead.concat([book]) : wantToRead
-      currentlyReading = (shelf==='currentlyReading') ? currentlyReading.concat([book]): currentlyReading
-
-      this.setState({books:{'read':read,'wantToRead':wantToRead,'currentlyReading':currentlyReading}})
-      
+      book.shelf = shelf
+      this.setState({ books: this.state.books.filter(b => b.id !== book.id).concat([ book ])})
     })
 
   }
 
   searchBook = (search, maxResults=20) => {
-
     return BooksAPI.search(search,maxResults)
-
   }
 
   componentDidMount = () => {
      BooksAPI.getAll().then(books => { 
-          const read = books.filter(book=> book.shelf==='read')
-          const wantToRead = books.filter(book=> book.shelf==='wantToRead')
-          const currentlyReading = books.filter(book=> book.shelf==='currentlyReading')
-          this.setState({books:{'read':read,'wantToRead':wantToRead,'currentlyReading':currentlyReading}})
+        this.setState({ books })
      })
   }
 
   render() {
-    
-   // console.log(this.state.books)
+  
     return (
       <div className="app">
         <Route exact path="/" render={()=>(
+            // <ListBooks books={this.state.books} updateBook={this.updateBookToShelf} />
             <ListBooks books={this.state.books} updateBook={this.updateBookToShelf} />
           )}
         />

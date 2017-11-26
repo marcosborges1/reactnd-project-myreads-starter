@@ -17,9 +17,9 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <BooksByShelf name="Currently Reading" books={books.currentlyReading} updateBook={updateBook} selectedShelf='currentlyReading'/>
-            <BooksByShelf name="Want to Read" books={books.wantToRead} updateBook={updateBook} selectedShelf='wantToRead' />
-            <BooksByShelf name="Read" books={books.read} updateBook={updateBook} selectedShelf='read'/>
+            <BooksByShelf name="Currently Reading" books={books.filter(book=>book.shelf==='currentlyReading')} updateBook={updateBook} selectedShelf='currentlyReading'/>
+            <BooksByShelf name="Want to Read" books={books.filter(book=>book.shelf==='wantToRead')} updateBook={updateBook} selectedShelf='wantToRead' />
+            <BooksByShelf name="Read" books={books.filter(book=>book.shelf==='read')} updateBook={updateBook} selectedShelf='read'/>
           </div>
         </div>
         <div className="open-search">
@@ -32,7 +32,7 @@ class ListBooks extends Component {
 
 ListBooks.propTypes = {
 
-  books: PropTypes.object.isRequired,
+  books: PropTypes.array.isRequired,
   updateBook : PropTypes.func.isRequired
 
 }
