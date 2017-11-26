@@ -1,13 +1,11 @@
-import React, {Component} from "react"
+import React from "react"
 import {Link} from 'react-router-dom'
 import BooksByShelf from './BooksByShelf'
 import PropTypes from 'prop-types'
 
-class ListBooks extends Component {
+const ListBooks = (props) => {
 
-  render() {
-
-    const {books, updateBook} = this.props
+    const {books, updateBook} = props
 
     return (
 
@@ -17,9 +15,9 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <BooksByShelf name="Currently Reading" books={books.filter(book=>book.shelf==='currentlyReading')} updateBook={updateBook} selectedShelf='currentlyReading'/>
-            <BooksByShelf name="Want to Read" books={books.filter(book=>book.shelf==='wantToRead')} updateBook={updateBook} selectedShelf='wantToRead' />
-            <BooksByShelf name="Read" books={books.filter(book=>book.shelf==='read')} updateBook={updateBook} selectedShelf='read'/>
+            <BooksByShelf name="Currently Reading" books={books.filter(book=>book.shelf==='currentlyReading')} updateBook={updateBook} />
+            <BooksByShelf name="Want to Read" books={books.filter(book=>book.shelf==='wantToRead')} updateBook={updateBook} />
+            <BooksByShelf name="Read" books={books.filter(book=>book.shelf==='read')} updateBook={updateBook} />
           </div>
         </div>
         <div className="open-search">
@@ -27,7 +25,6 @@ class ListBooks extends Component {
         </div>
       </div>
     )
-  }
 }
 
 ListBooks.propTypes = {
