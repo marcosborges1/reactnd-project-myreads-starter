@@ -19,12 +19,18 @@ class SearchBook extends Component {
   }
 
   updateSearch = (value) => {
-     this.props.search(value, 20).then(books=> {
-      books.map(b=> {
-          b.shelf = this.bookInUserShelf(b)
-          return b
-      })
-      this.setState({books})
+    if(value.length===0) { this.setState({books:[]}); return }
+    this.props.search(value, 20).then(books=> {
+      if(!books || books.error) {
+        this.setState({books:[]})
+      }
+      else if(Array.isArray(books)) {
+        books.map(b=> {
+            b.shelf = this.bookInUserShelf(b)
+            return b
+        })
+        this.setState({books})
+      }
     })
   }
   
