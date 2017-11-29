@@ -21,10 +21,11 @@ class SearchBook extends Component {
   updateSearch = (value) => {
     if(value.length===0) { this.setState({books:[]}); return }
     this.props.search(value, 20).then(books=> {
-      if(!books || books.error) {
+      if(!books || books.error) {        
         this.setState({books:[]})
       }
       else if(Array.isArray(books)) {
+
         books.map(b=> {
             b.shelf = this.bookInUserShelf(b)
             return b
@@ -33,7 +34,6 @@ class SearchBook extends Component {
       }
     })
   }
-  
 
   render() {
 
@@ -51,7 +51,7 @@ class SearchBook extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          {books.length>0 && (<Books books={books} updateBook={updateBook} />)}
+          {books && (<Books books={books} updateBook={updateBook} />)}
         </div>
       </div>
     )
