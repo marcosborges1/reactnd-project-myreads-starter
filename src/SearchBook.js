@@ -7,8 +7,11 @@ import { Debounce } from 'react-throttle'
 
 class SearchBook extends Component {
 
-  state = {
-    books:[]
+  constructor(props) {
+    super(props)
+    this.state = {
+      books:[]
+    }
   }
 
   bookInUserShelf = (book) => {
@@ -23,6 +26,7 @@ class SearchBook extends Component {
     this.props.search(value, 20).then(books=> {
       if(!books || books.error) {        
         this.setState({books:[]})
+        return books
       }
       else if(Array.isArray(books)) {
 
