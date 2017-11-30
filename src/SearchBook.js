@@ -18,7 +18,7 @@ class SearchBook extends Component {
     const result = this.props.books.find(b=>{
         return (b.id===book.id)
     })
-    return (result) ? result.shelf: undefined
+    return (result) ? result.shelf: 'none'
   }
 
   updateSearch = (value) => {
@@ -29,7 +29,6 @@ class SearchBook extends Component {
         return books
       }
       else if(Array.isArray(books)) {
-
         books.map(b=> {
             b.shelf = this.bookInUserShelf(b)
             return b

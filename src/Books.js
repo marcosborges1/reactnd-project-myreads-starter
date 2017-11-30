@@ -15,8 +15,8 @@ const Books = (props) => {
                 <div className="book-top">
                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url(${thumbnail})`}}></div>
                   <div className="book-shelf-changer">
-                    <select value={book.shelf!==undefined?book.shelf:'none'} onChange={(e)=>updateBook(book, e.target.value)}>
-                      <option value="none" disabled>Move to...</option>
+                    <select value={book.shelf} onChange={(e)=>updateBook(book, e.target.value)}>
+                      <option value="" disabled>Move to...</option>
                       <option value="currentlyReading">Currently Reading</option>
                       <option value="wantToRead">Want to Read</option>
                       <option value="read">Read</option>

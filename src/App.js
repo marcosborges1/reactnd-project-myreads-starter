@@ -7,13 +7,15 @@ import { Route } from 'react-router-dom'
 
 
 class BooksApp extends Component {
-  state = { 
-    books:[]
+
+  constructor() {
+    super()
+    this.state = {
+      books:[]
+    }
   }
 
   updateBookToShelf = (book, shelf) => {
-
-    if(shelf==='none') return
 
     BooksAPI.update(book, shelf).then(()=> {
       book.shelf = shelf
