@@ -17,6 +17,6 @@ To get started developing right away:
 
 ## More information
 
-More information can be acessed in starter template base [Udacity's](https://github.com/udacity/reactnd-project-myreads-starter).
+More information can be accessed on the basis of [Udacity's](https://github.com/udacity/reactnd-project-myreads-starter) initial base model.
 
 
